@@ -1,0 +1,7 @@
+#This is gitignore file
+#Format rules:
+*.csv
+*.pkl
+
+#Folder rules
+.lab_venv*
