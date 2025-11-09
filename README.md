@@ -31,3 +31,25 @@ pip install -r requirements.txt
 * Числовые признаки мало зависимы друг от друга, что не позволяет снизить их размерность (кроме размеров экрана и модуля камеры).(см график `./eda/graph1.png`)
 
 Обработанная выборка сохранена в файл `./data/clean_data.pkl`
+
+# Настройка и обучение модели
+Для настройки модели используется MLFlow
+
+Для запуска выполнить скрипт (находится в папке ./mlflow)
+```
+sh start_mlflow.sh
+
+```
+Исследования находятся в файле `./research/research.ipynb`
+
+Лучшая модель получена в с помогщью CatboostClassifier, RFE и Optuna Search
+`run_id = 08cfd1ee98cf442d91df8687db1aaea8` 
+Она показывает следующие результаты
+precision: 0.9210790773157267,
+recall: 0.9216198957578268,
+f1_score: 0.9212442875986313,
+roc_auc: 0.9954045175474214
+В ней выбраны следующие столбцы:
+'ram', 'ram', 'ram*sc_h', 'px_width*ram', 'px_height*ram', 'sqrt(n_cores)*ram', 'battery_power*ram', 'ram*log(int_memory)', 'battery_power*px_width', 'battery_power*px_height', 'ram*log(talk_time)', 'sqrt(clock_speed)*ram'
+С помощью Optuna Search выделены следующие гиперпараметры (за 20 прогонов):
+'depth': 5, 'n_estimators': 150, 'learning_rate': 0.08491529648591742

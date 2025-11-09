@@ -5,3 +5,6 @@
 
 #Folder rules
 .lab_venv*
+mlartifacts*
+mlruns*
+catboost_info*
