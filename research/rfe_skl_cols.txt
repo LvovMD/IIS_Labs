@@ -1,0 +1,1 @@
+['num__battery_power', 'num__px_height', 'num__px_width', 'num__ram', 'quantile__battery_power', 'quantile__px_height', 'quantile__px_width', 'quantile__ram', 'poly_px__px_height', 'poly_px__px_width', 'poly_px__px_height px_width', 'poly_px__px_width^2']
