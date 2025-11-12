@@ -8,3 +8,4 @@
 mlartifacts*
 mlruns*
 catboost_info*
+__pycache__*
