@@ -53,3 +53,62 @@ roc_auc: 0.9954045175474214
 'ram', 'ram', 'ram*sc_h', 'px_width*ram', 'px_height*ram', 'sqrt(n_cores)*ram', 'battery_power*ram', 'ram*log(int_memory)', 'battery_power*px_width', 'battery_power*px_height', 'ram*log(talk_time)', 'sqrt(clock_speed)*ram'
 С помощью Optuna Search выделены следующие гиперпараметры (за 20 прогонов):
 'depth': 5, 'n_estimators': 150, 'learning_rate': 0.08491529648591742
+
+# Создание сервисов
+
+Создан сервис API для облегчения доступа к результатам классификации.
+В папке ml_service содержатся основные скрипты, описывающие работу сервиса: main.py - основная логика веб-сервера, api_handler - непосредственно работа с моделью, а также образ Dockerfile для создания контейнера.
+В папке models должна содержаться непосредственно сама модель model.pcl в формате Pickle, а также get_model.py - скрипт для ее извлечения из MLFlow
+
+Для создания образа необходимо использовать следующую команду:
+```
+docker build . --tag mobile_price_model:1
+
+```
+
+Для запуска контейнера необходимо использовать следующую команду:
+```
+docker run -p 8001:8000 -v $(pwd)/../models:/models mobile_price_model:1
+
+```
+
+Для проверки работоспособности сервиса необходимо перейти на следующий адрес в браузере:
+```
+http://localhost:8000/docs
+
+```
+Пример json-строки запроса для проверки:
+```
+{
+ "blue": 1,
+ "dual_sim": 1,
+ "four_g": 0,
+ "three_g": 0,
+ "touch_screen": 1,
+ "wifi": 0,
+ "battery_power": 1043,
+ "clock_speed": 1.8,
+ "fc": 14,
+ "int_memory": 5,
+ "m_dep": 0.1,
+ "mobile_wt": 193,
+ "n_cores": 3,
+ "pc": 16,
+ "px_height": 226,
+ "px_width": 1412,
+ "ram": 3476,
+ "sc_h": 12,
+ "sc_w": 7,
+ "talk_time": 2
+}
+
+```
+
+Пример возвращаемого значения:
+```
+{
+  "price_range": "[3]",
+  "item_id": "1"
+}
+
+```

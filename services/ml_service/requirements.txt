@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pandas
+pickle4
+dill
+scikit-learn
+requests
+catboost
+autofeat
