@@ -4,7 +4,7 @@ import dill as pkl
 # import psycopg2
 from datetime import datetime
 
-import os
+# import os
 
 logger = logging.getLogger("uvicorn.error")
 
