@@ -7,3 +7,5 @@ scikit-learn
 requests
 catboost
 autofeat
+prometheus_fastapi_instrumentator
+psycopg2-binary
